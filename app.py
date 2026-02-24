@@ -287,7 +287,8 @@ def calculate_metrics(df, zombie_days_threshold, status_mapping):
             'wip_counts': pd.Series(),
             'noise_ratio': 0,
             'total_issues': 0,
-            'active_issues': 0
+            'active_issues': 0,
+            'avg_cycle_time': 0
         }
 
     now = pd.Timestamp.now(tz='UTC')
@@ -361,6 +362,58 @@ def calculate_metrics(df, zombie_days_threshold, status_mapping):
     done_count = df[df['Category'] == 'DONE'].shape[0]
     noise_ratio = (noisy_issues_count / done_count * 100) if done_count > 0 else 0
     
+    # Calculate Cycle Time
+    if 'Created' in df.columns and df['Created'].dt.tz is None:
+         df['Created'] = df['Created'].dt.tz_localize('UTC')
+
+    cycle_times = []
+    for _, row in df.iterrows():
+        transitions = row.get('Transitions', [])
+        created_dt = row.get('Created', None)
+        current_category = row.get('Category', 'IN_PROGRESS')
+        
+        valid_transitions = []
+        if isinstance(transitions, list):
+            for t in transitions:
+                if t.get('date'):
+                    try:
+                        t_date = pd.to_datetime(t['date'], utc=True)
+                        valid_transitions.append((t_date, t.get('to', '')))
+                    except:
+                        pass
+            valid_transitions.sort(key=lambda x: x[0])
+            
+        in_progress_date = None
+        done_date = None
+        
+        for t_date, to_status in valid_transitions:
+            to_cat = status_mapping.get(to_status, 'IN_PROGRESS')
+            if to_cat == 'IN_PROGRESS' and in_progress_date is None:
+                in_progress_date = t_date
+            if to_cat == 'DONE':
+                done_date = t_date
+                
+        if current_category != 'DONE':
+            done_date = None
+            
+        if in_progress_date is None and current_category in ['IN_PROGRESS', 'DONE']:
+            in_progress_date = created_dt
+            
+        if in_progress_date:
+            end_date = done_date if done_date else now
+            if end_date >= in_progress_date:
+                cycle_times.append(round((end_date - in_progress_date).total_seconds() / 86400.0, 1))
+            else:
+                cycle_times.append(0)
+        else:
+            cycle_times.append(None)
+
+    df['Cycle Time (Days)'] = cycle_times
+    
+    done_issues = df[df['Category'] == 'DONE']
+    avg_cycle_time = done_issues['Cycle Time (Days)'].mean()
+    avg_cycle_time = round(avg_cycle_time, 1) if pd.notna(avg_cycle_time) else 0
+    
     return {
         'zombies': zombies,
         'orphans': orphans,
@@ -369,8 +422,39 @@ def calculate_metrics(df, zombie_days_threshold, status_mapping):
         'wip_counts': wip_counts,
         'noise_ratio': noise_ratio,
         'total_issues': len(df),
-        'active_issues': len(active_tasks)
+        'active_issues': len(active_tasks),
+        'avg_cycle_time': avg_cycle_time
     }
+
+def generate_executive_summary(metrics, api_key):
+    if not api_key:
+        return "⚠️ Введіть OpenAI API Key у бічній панелі."
+    
+    client = OpenAI(api_key=api_key)
+    
+    summary_data = {
+        "Total Issues": metrics.get('total_issues', 0),
+        "Zombie Tasks": len(metrics.get('zombies', [])),
+        "Overloaded Users Count": len(metrics.get('overloaded_assignees', [])),
+        "Overloaded Users Names": metrics.get('overloaded_assignees', []),
+        "Noise Ratio (%)": metrics.get('noise_ratio', 0),
+        "Average Cycle Time (Days)": metrics.get('avg_cycle_time', 0)
+    }
+    
+    prompt = f"""
+    You are an expert Agile Coach and Delivery Manager. Analyze these metrics: {json.dumps(summary_data, ensure_ascii=False)}.
+    Write a concise, professional executive summary in UKRAINIAN highlighting risks, bottlenecks, and recommendations for the team. Keep it under 3 paragraphs.
+    """
+    
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4o",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.7
+        )
+        return response.choices[0].message.content
+    except Exception as e:
+        return f"AI Error: {e}"
 
 # --- Main UI ---
 
@@ -563,10 +647,23 @@ def main():
         - **Коефіцієнт шуму (Reopened/Done):** {metrics['noise_ratio']:.1f}%
         - **"Мертві" Епіки:** {len(metrics['dead_epics'])}
         - **Перевантажені виконавці:** {len(metrics['overloaded_assignees'])}
+        - **Середній час циклу (Cycle Time):** {metrics.get('avg_cycle_time', 0)} днів
         """)
+
+        st.divider()
+        with st.expander("🤖 AI Резюме для Керівництва", expanded=False):
+            st.markdown("Згенеруйте автоматичний звіть на основі поточних метрик для прийняття управлінських рішень.")
+            if st.button("Згенерувати AI Звіт", key="gen_ai_summary"):
+                with st.spinner("Генерація звіту..."):
+                    summary = generate_executive_summary(metrics, openai_api_key)
+                    st.markdown(summary)
 
     # --- Tab 3: Visual Analytics ---
     with tab3:
+        st.subheader("⏱️ Середній час виконання (Cycle Time)")
+        st.metric("Avg Cycle Time (для завершених задач)", f"{metrics.get('avg_cycle_time', 0)} днів")
+        st.divider()
+        
         st.subheader("Розподіл за категоріями (Mapping)")
         cat_counts = analysis_df['Category'].value_counts().reset_index()
         cat_counts.columns = ['Category', 'Count']
