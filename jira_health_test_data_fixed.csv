@@ -1,0 +1,101 @@
+Issue key,Summary,Status,Assignee,Created,Updated,Issue Type,Priority
+PROJ-1,Stress-test issue PROJ-1: Epic - High,In Progress,Oleh Dev,2025-11-22T00:34:52Z,2025-12-05T02:34:52Z,Epic,High
+PROJ-2,Stress-test issue PROJ-2: Epic - Low,In Progress,Maria QA,2025-07-22T15:34:52Z,2025-11-29T21:34:52Z,Epic,Low
+PROJ-3,Stress-test issue PROJ-3: Epic - Low,In Progress,Anna PM,2025-11-16T02:34:52Z,2025-12-04T09:34:52Z,Epic,Low
+PROJ-4,Stress-test issue PROJ-4: Epic - Low,In Progress,Sofia BA,2025-07-12T18:34:52Z,2025-12-04T21:34:52Z,Epic,Low
+PROJ-5,Stress-test issue PROJ-5: Epic - Medium,In Progress,Dmytro DevOps,2025-11-10T10:34:52Z,2025-11-27T04:34:52Z,Epic,Medium
+PROJ-6,Stress-test issue PROJ-6: Story - Highest,In Progress,Oleh Dev,2025-09-14T05:34:52Z,2025-11-28T18:34:52Z,Story,Highest
+PROJ-7,Stress-test issue PROJ-7: Task - Medium,To Do,Anna PM,2025-10-11T22:34:52Z,2025-11-28T01:34:52Z,Task,Medium
+PROJ-8,Stress-test issue PROJ-8: Bug - Medium,In Progress,Anna PM,2025-06-21T15:34:52Z,2025-11-27T21:34:52Z,Bug,Medium
+PROJ-9,Stress-test issue PROJ-9: Task - Highest,To Do,Sofia BA,2025-07-15T18:34:52Z,2025-12-13T08:34:52Z,Task,Highest
+PROJ-10,Stress-test issue PROJ-10: Bug - High,In Progress,Oleh Dev,2025-10-28T21:34:52Z,2025-11-19T15:34:52Z,Bug,High
+PROJ-11,Stress-test issue PROJ-11: Task - High,To Do,John Dev,2025-07-02T11:34:52Z,2025-12-05T13:34:52Z,Task,High
+PROJ-12,Stress-test issue PROJ-12: Task - Low,In Progress,John Dev,2025-08-08T05:34:52Z,2025-12-12T18:34:52Z,Task,Low
+PROJ-13,Stress-test issue PROJ-13: Task - Low,To Do,Anna PM,2025-09-12T05:34:52Z,2025-12-12T00:34:52Z,Task,Low
+PROJ-14,Stress-test issue PROJ-14: Task - Highest,In Progress,John Dev,2025-08-27T16:34:52Z,2025-12-28T14:34:52Z,Task,Highest
+PROJ-15,Stress-test issue PROJ-15: Story - Low,To Do,Dmytro DevOps,2025-05-30T14:34:52Z,2025-11-22T04:34:52Z,Story,Low
+PROJ-16,Stress-test issue PROJ-16: Task - High,To Do,John Dev,2025-10-02T03:34:52Z,2026-01-01T08:34:52Z,Task,High
+PROJ-17,Stress-test issue PROJ-17: Bug - Low,In Progress,Anna PM,2025-10-12T06:34:52Z,2025-12-15T18:34:52Z,Bug,Low
+PROJ-18,Stress-test issue PROJ-18: Bug - Highest,In Progress,Anna PM,2025-07-17T02:34:52Z,2025-12-05T10:34:52Z,Bug,Highest
+PROJ-19,Stress-test issue PROJ-19: Bug - Medium,To Do,Sofia BA,2025-08-17T12:34:52Z,2025-11-18T09:34:52Z,Bug,Medium
+PROJ-20,Stress-test issue PROJ-20: Story - Highest,In Progress,Oleh Dev,2025-10-22T21:34:52Z,2025-12-22T18:34:52Z,Story,Highest
+PROJ-21,Stress-test issue PROJ-21: Story - Medium,В работе,,2025-12-04T14:34:52Z,2026-02-15T14:34:52Z,Story,Medium
+PROJ-22,Stress-test issue PROJ-22: Bug - Medium,Закрыто,,2025-09-21T17:34:52Z,2026-02-14T03:34:52Z,Bug,Medium
+PROJ-23,Stress-test issue PROJ-23: Task - Medium,Закрыто,,2025-08-24T15:34:52Z,2026-02-16T08:34:52Z,Task,Medium
+PROJ-24,Stress-test issue PROJ-24: Bug - Highest,Очікує,,2025-10-11T23:34:52Z,2026-02-13T19:34:52Z,Bug,Highest
+PROJ-25,Stress-test issue PROJ-25: Story - Highest,Review,,2025-10-26T11:34:52Z,2026-02-16T16:34:52Z,Story,Highest
+PROJ-26,Stress-test issue PROJ-26: Bug - Low,Нужно сделать,,2026-02-15T01:34:52Z,2026-02-16T19:34:52Z,Bug,Low
+PROJ-27,Stress-test issue PROJ-27: Task - Medium,In Progress,,2026-02-07T01:34:52Z,2026-02-14T03:34:52Z,Task,Medium
+PROJ-28,Stress-test issue PROJ-28: Task - Medium,Очікує,,2025-12-11T15:34:52Z,2026-02-15T02:34:52Z,Task,Medium
+PROJ-29,Stress-test issue PROJ-29: Bug - High,In Progress,,2025-10-18T16:34:52Z,2026-02-16T07:34:52Z,Bug,High
+PROJ-30,Stress-test issue PROJ-30: Bug - Highest,In Progress,,2025-11-18T20:34:52Z,2026-02-15T19:34:52Z,Bug,Highest
+PROJ-31,Stress-test issue PROJ-31: Bug - High,Done,Ivan Overloaded,2025-10-03T05:34:52Z,2026-02-16T16:34:52Z,Bug,High
+PROJ-32,Stress-test issue PROJ-32: Task - Medium,Закрыто,Ivan Overloaded,2025-11-30T10:34:52Z,2026-02-16T06:34:52Z,Task,Medium
+PROJ-33,Stress-test issue PROJ-33: Task - Low,В роботі,Ivan Overloaded,2025-11-14T10:34:52Z,2026-02-14T17:34:52Z,Task,Low
+PROJ-34,Stress-test issue PROJ-34: Task - High,Review,Ivan Overloaded,2025-11-03T16:34:52Z,2026-02-15T15:34:52Z,Task,High
+PROJ-35,Stress-test issue PROJ-35: Story - Medium,Закрыто,Ivan Overloaded,2026-02-05T11:34:52Z,2026-02-13T11:34:52Z,Story,Medium
+PROJ-36,Stress-test issue PROJ-36: Bug - High,В роботі,Ivan Overloaded,2025-09-12T13:34:52Z,2026-02-15T00:34:52Z,Bug,High
+PROJ-37,Stress-test issue PROJ-37: Task - Highest,Готово,Ivan Overloaded,2025-12-19T17:34:52Z,2026-02-14T20:34:52Z,Task,Highest
+PROJ-38,Stress-test issue PROJ-38: Bug - Medium,Review,Ivan Overloaded,2025-10-12T21:34:52Z,2026-02-14T16:34:52Z,Bug,Medium
+PROJ-39,Stress-test issue PROJ-39: Bug - Low,Готово,Ivan Overloaded,2026-01-15T13:34:52Z,2026-02-16T01:34:52Z,Bug,Low
+PROJ-40,Stress-test issue PROJ-40: Bug - Medium,Done,Ivan Overloaded,2025-11-19T00:34:52Z,2026-02-13T02:34:52Z,Bug,Medium
+PROJ-41,Stress-test issue PROJ-41: Bug - Highest,Очікує,Ivan Overloaded,2026-01-05T18:34:52Z,2026-02-15T23:34:52Z,Bug,Highest
+PROJ-42,Stress-test issue PROJ-42: Story - Medium,Done,Ivan Overloaded,2026-01-05T07:34:52Z,2026-02-13T02:34:52Z,Story,Medium
+PROJ-43,Stress-test issue PROJ-43: Task - Highest,Готово,Ivan Overloaded,2025-09-27T01:34:52Z,2026-02-15T05:34:52Z,Task,Highest
+PROJ-44,Stress-test issue PROJ-44: Story - Low,In Progress,Ivan Overloaded,2025-12-27T03:34:52Z,2026-02-15T09:34:52Z,Story,Low
+PROJ-45,Stress-test issue PROJ-45: Bug - Low,Review,Ivan Overloaded,2025-12-13T12:34:52Z,2026-02-14T06:34:52Z,Bug,Low
+PROJ-46,Stress-test issue PROJ-46: Bug - High,Закрыто,Ivan Overloaded,2026-01-27T19:34:52Z,2026-02-13T18:34:52Z,Bug,High
+PROJ-47,Stress-test issue PROJ-47: Bug - High,Нужно сделать,Ivan Overloaded,2026-01-09T13:34:52Z,2026-02-13T06:34:52Z,Bug,High
+PROJ-48,Stress-test issue PROJ-48: Task - Medium,Закрыто,Ivan Overloaded,2025-12-30T13:34:52Z,2026-02-16T08:34:52Z,Task,Medium
+PROJ-49,Stress-test issue PROJ-49: Story - Low,Done,Ivan Overloaded,2025-09-08T08:34:52Z,2026-02-15T07:34:52Z,Story,Low
+PROJ-50,Stress-test issue PROJ-50: Task - Low,To Do,Ivan Overloaded,2025-10-03T09:34:52Z,2026-02-14T01:34:52Z,Task,Low
+PROJ-51,Stress-test issue PROJ-51: Story - Highest,Закрыто,Ivan Overloaded,2025-12-29T07:34:52Z,2026-02-16T15:34:52Z,Story,Highest
+PROJ-52,Stress-test issue PROJ-52: Story - Low,Закрыто,Ivan Overloaded,2026-02-05T03:34:52Z,2026-02-13T05:34:52Z,Story,Low
+PROJ-53,Stress-test issue PROJ-53: Bug - Highest,Нужно сделать,Ivan Overloaded,2025-12-05T10:34:52Z,2026-02-15T00:34:52Z,Bug,Highest
+PROJ-54,Stress-test issue PROJ-54: Task - Highest,Review,Ivan Overloaded,2025-12-23T15:34:52Z,2026-02-14T05:34:52Z,Task,Highest
+PROJ-55,Stress-test issue PROJ-55: Bug - Medium,In Progress,Ivan Overloaded,2025-11-24T06:34:52Z,2026-02-13T08:34:52Z,Bug,Medium
+PROJ-56,Stress-test issue PROJ-56: Bug - Medium,Review,Anna PM,2026-01-04T21:34:52Z,2026-02-14T19:34:52Z,Bug,Medium
+PROJ-57,Stress-test issue PROJ-57: Story - High,Done,Maria QA,2026-01-19T03:34:52Z,2026-02-13T15:34:52Z,Story,High
+PROJ-58,Stress-test issue PROJ-58: Story - Highest,Review,Dmytro DevOps,2025-10-26T08:34:52Z,2026-02-15T00:34:52Z,Story,Highest
+PROJ-59,Stress-test issue PROJ-59: Bug - Highest,Review,John Dev,2026-01-20T13:34:52Z,2026-02-14T12:34:52Z,Bug,Highest
+PROJ-60,Stress-test issue PROJ-60: Story - High,Закрыто,Maria QA,2026-02-07T20:34:52Z,2026-02-13T08:34:52Z,Story,High
+PROJ-61,Stress-test issue PROJ-61: Task - High,В роботі,Sofia BA,2025-12-19T16:34:52Z,2026-02-16T19:34:52Z,Task,High
+PROJ-62,Stress-test issue PROJ-62: Bug - Low,To Do,Maria QA,2026-01-12T01:34:52Z,2026-02-15T14:34:52Z,Bug,Low
+PROJ-63,Stress-test issue PROJ-63: Bug - High,Закрыто,Oleh Dev,2025-11-20T22:34:52Z,2026-02-13T00:34:52Z,Bug,High
+PROJ-64,Stress-test issue PROJ-64: Story - High,Done,Dmytro DevOps,2025-12-06T20:34:52Z,2026-02-13T20:34:52Z,Story,High
+PROJ-65,Stress-test issue PROJ-65: Bug - Low,Нужно сделать,Anna PM,2025-12-09T17:34:52Z,2026-02-15T20:34:52Z,Bug,Low
+PROJ-66,Stress-test issue PROJ-66: Story - Highest,Закрыто,Maria QA,2025-09-06T10:34:52Z,2026-02-13T14:34:52Z,Story,Highest
+PROJ-67,Stress-test issue PROJ-67: Task - Low,Review,Dmytro DevOps,2025-12-10T16:34:52Z,2026-02-16T17:34:52Z,Task,Low
+PROJ-68,Stress-test issue PROJ-68: Story - Medium,В роботі,Maria QA,2025-10-22T21:34:52Z,2026-02-15T13:34:52Z,Story,Medium
+PROJ-69,Stress-test issue PROJ-69: Bug - Medium,To Do,Maria QA,2026-02-10T21:34:52Z,2026-02-14T21:34:52Z,Bug,Medium
+PROJ-70,Stress-test issue PROJ-70: Task - Medium,Review,John Dev,2025-08-27T23:34:52Z,2026-02-13T19:34:52Z,Task,Medium
+PROJ-71,Stress-test issue PROJ-71: Task - Highest,Закрыто,John Dev,2025-11-25T08:34:52Z,2026-02-13T06:34:52Z,Task,Highest
+PROJ-72,Stress-test issue PROJ-72: Story - Medium,Review,Maria QA,2025-11-18T09:34:52Z,2026-02-15T10:34:52Z,Story,Medium
+PROJ-73,Stress-test issue PROJ-73: Story - Medium,В роботі,Anna PM,2026-01-29T15:34:52Z,2026-02-13T17:34:52Z,Story,Medium
+PROJ-74,Stress-test issue PROJ-74: Task - Highest,В роботі,Dmytro DevOps,2025-11-30T23:34:52Z,2026-02-15T00:34:52Z,Task,Highest
+PROJ-75,Stress-test issue PROJ-75: Story - Highest,В роботі,Oleh Dev,2025-12-07T11:34:52Z,2026-02-13T22:34:52Z,Story,Highest
+PROJ-76,Stress-test issue PROJ-76: Task - High,Review,Maria QA,2025-12-22T02:34:52Z,2026-02-16T13:34:52Z,Task,High
+PROJ-77,Stress-test issue PROJ-77: Story - Medium,Очікує,Maria QA,2025-12-05T15:34:52Z,2026-02-16T07:34:52Z,Story,Medium
+PROJ-78,Stress-test issue PROJ-78: Story - Medium,To Do,Sofia BA,2026-01-24T10:34:52Z,2026-02-16T14:34:52Z,Story,Medium
+PROJ-79,Stress-test issue PROJ-79: Task - Highest,Очікує,Anna PM,2025-11-29T17:34:52Z,2026-02-16T13:34:52Z,Task,Highest
+PROJ-80,Stress-test issue PROJ-80: Story - Medium,Закрыто,Sofia BA,2025-09-14T13:34:52Z,2026-02-15T01:34:52Z,Story,Medium
+PROJ-81,Stress-test issue PROJ-81: Task - High,Done,John Dev,2025-09-07T03:34:52Z,2026-02-13T23:34:52Z,Task,High
+PROJ-82,Stress-test issue PROJ-82: Story - Medium,Закрыто,Dmytro DevOps,2025-08-16T07:34:52Z,2026-02-12T23:34:52Z,Story,Medium
+PROJ-83,Stress-test issue PROJ-83: Task - Medium,Нужно сделать,Sofia BA,2025-09-18T03:34:52Z,2026-02-16T01:34:52Z,Task,Medium
+PROJ-84,Stress-test issue PROJ-84: Story - Medium,To Do,Anna PM,2025-11-13T23:34:52Z,2026-02-15T02:34:52Z,Story,Medium
+PROJ-85,Stress-test issue PROJ-85: Bug - Highest,To Do,Sofia BA,2025-10-01T05:34:52Z,2026-02-16T02:34:52Z,Bug,Highest
+PROJ-86,Stress-test issue PROJ-86: Bug - Medium,To Do,Maria QA,2025-10-07T03:34:52Z,2026-02-13T20:34:52Z,Bug,Medium
+PROJ-87,Stress-test issue PROJ-87: Task - Low,In Progress,Sofia BA,2026-01-24T06:34:52Z,2026-02-13T14:34:52Z,Task,Low
+PROJ-88,Stress-test issue PROJ-88: Task - Medium,Review,Oleh Dev,2025-11-07T05:34:52Z,2026-02-13T07:34:52Z,Task,Medium
+PROJ-89,Stress-test issue PROJ-89: Task - Highest,To Do,Maria QA,2025-09-14T16:34:52Z,2026-02-15T20:34:52Z,Task,Highest
+PROJ-90,Stress-test issue PROJ-90: Bug - High,В роботі,Dmytro DevOps,2025-10-14T21:34:52Z,2026-02-15T22:34:52Z,Bug,High
+PROJ-91,Stress-test issue PROJ-91: Bug - Highest,In Progress,Dmytro DevOps,2025-10-11T16:34:52Z,2026-02-15T01:34:52Z,Bug,Highest
+PROJ-92,Stress-test issue PROJ-92: Bug - High,В работе,John Dev,2025-12-25T20:34:52Z,2026-02-16T05:34:52Z,Bug,High
+PROJ-93,Stress-test issue PROJ-93: Bug - Low,В роботі,Anna PM,2025-10-06T06:34:52Z,2026-02-13T20:34:52Z,Bug,Low
+PROJ-94,Stress-test issue PROJ-94: Bug - High,Review,Oleh Dev,2026-01-23T00:34:52Z,2026-02-16T04:34:52Z,Bug,High
+PROJ-95,Stress-test issue PROJ-95: Bug - High,Нужно сделать,Oleh Dev,2025-11-12T12:34:52Z,2026-02-14T19:34:52Z,Bug,High
+PROJ-96,Stress-test issue PROJ-96: Bug - Highest,To Do,John Dev,2025-10-12T01:34:52Z,2026-02-15T22:34:52Z,Bug,Highest
+PROJ-97,Stress-test issue PROJ-97: Bug - Highest,Done,Maria QA,2025-11-08T01:34:52Z,2026-02-13T11:34:52Z,Bug,Highest
+PROJ-98,Stress-test issue PROJ-98: Bug - Low,Готово,Anna PM,2026-01-14T04:34:52Z,2026-02-14T10:34:52Z,Bug,Low
+PROJ-99,Stress-test issue PROJ-99: Task - Low,В роботі,Maria QA,2025-11-05T08:34:52Z,2026-02-14T20:34:52Z,Task,Low
+PROJ-100,Stress-test issue PROJ-100: Bug - Low,В роботі,John Dev,2026-01-20T13:34:52Z,2026-02-16T14:34:52Z,Bug,Low
