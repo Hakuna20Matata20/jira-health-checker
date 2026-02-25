@@ -159,7 +159,7 @@ def fetch_jira_data(jira_url, email, api_token, project_key, days_back):
     if not jira_url.startswith("http"):
         jira_url = f"https://{jira_url}"
         
-    api_endpoint = f"{jira_url.rstrip('/')}/rest/api/3/search/jql"
+    api_endpoint = f"{jira_url.rstrip('/')}/rest/api/3/search"
     
     headers = {
         "Accept": "application/json",
