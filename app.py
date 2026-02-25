@@ -159,7 +159,7 @@ def fetch_jira_data(jira_url, email, api_token, project_key, days_back):
     if not jira_url.startswith("http"):
         jira_url = f"https://{jira_url}"
         
-    api_endpoint = f"{jira_url.rstrip('/')}/rest/api/3/search"
+    api_endpoint = f"{jira_url.rstrip('/')}/rest/api/3/search/jql"
     
     headers = {
         "Accept": "application/json",
@@ -167,8 +167,8 @@ def fetch_jira_data(jira_url, email, api_token, project_key, days_back):
     }
     
     all_issues = []
-    start_at = 0
     max_results = 100 
+    next_page_token = None
     
     status_placeholder = st.empty()
     fetch_count = 0
@@ -181,10 +181,11 @@ def fetch_jira_data(jira_url, email, api_token, project_key, days_back):
             
             payload = {
                 "jql": jql,
-                "startAt": start_at,
                 "maxResults": max_results,
                 "fields": ["key", "summary", "status", "assignee", "created", "updated", "issuetype", "priority"],
             }
+            if next_page_token:
+                payload["nextPageToken"] = next_page_token
                 
             response = requests.post(
                 api_endpoint, 
@@ -207,10 +208,10 @@ def fetch_jira_data(jira_url, email, api_token, project_key, days_back):
                 break
                 
             all_issues.extend(batch)
-            start_at += len(batch)
             
-            total_issues = data.get("total", 0)
-            if start_at >= total_issues:
+            # Cursor-based pagination for /search/jql
+            next_page_token = data.get("nextPageToken")
+            if not next_page_token:
                 break
                 
         # 2. Fetch Changelog History (Separate Loop for Reliability)
