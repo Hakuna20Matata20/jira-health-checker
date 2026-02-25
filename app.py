@@ -247,6 +247,30 @@ def fetch_jira_data(jira_url, email, api_token, project_key, days_back):
     except Exception as e:
         return None, f"Unexpected Error: {str(e)}"
 
+def fetch_project_statuses(jira_url, email, api_token, project_key):
+    """Fetches all possible statuses configured for the given project."""
+    jira_url = jira_url.strip()
+    if not jira_url.startswith("http"):
+        jira_url = f"https://{jira_url}"
+        
+    api_endpoint = f"{jira_url.rstrip('/')}/rest/api/3/project/{project_key}/statuses"
+    headers = {"Accept": "application/json"}
+    
+    try:
+        response = requests.get(api_endpoint, headers=headers, auth=(email, api_token))
+        if response.status_code == 200:
+            data = response.json()
+            statuses = set()
+            for issue_type in data:
+                for status in issue_type.get('statuses', []):
+                    if 'name' in status:
+                        statuses.add(status['name'])
+            return sorted(list(statuses)), None
+        else:
+            return None, f"Status Fetch Error ({response.status_code})"
+    except Exception as e:
+        return None, f"Unexpected error fetching statuses: {str(e)}"
+
 def classify_statuses_with_ai(unique_statuses, api_key):
     """Uses OpenAI to classify statuses into TODO, IN_PROGRESS, DONE."""
     if not api_key:
@@ -517,7 +541,12 @@ def main():
             st.sidebar.info(f"Використовуються дані з кешу ({len(full_df)} задач).")
 
         if st.sidebar.button("Завантажити дані"):
-            with st.spinner("З'єднання з Jira..."):
+            with st.spinner("З'єднання з Jira та завантаження статусів..."):
+                api_statuses, status_error = fetch_project_statuses(jira_url, jira_email, jira_token, project_key)
+                if status_error:
+                    st.sidebar.warning(f"Не вдалося завантажити всі статуси проєкту. Будуть використані лише статуси активних задач. ({status_error})")
+                    api_statuses = None
+                
                 api_df, error = fetch_jira_data(jira_url, jira_email, jira_token, project_key, timeframe_days)
                 
                 if error:
@@ -527,6 +556,11 @@ def main():
                 
                 full_df = api_df
                 st.session_state['jira_data_cache'] = full_df
+                if api_statuses:
+                    st.session_state['project_statuses_cache'] = api_statuses
+                elif 'project_statuses_cache' in st.session_state:
+                    del st.session_state['project_statuses_cache']
+                
                 st.sidebar.success(f"Завантажено {len(full_df)} задач!")
 
         if full_df.empty:
@@ -541,7 +575,13 @@ def main():
             return
 
     # --- Status Management ---
-    unique_statuses = sorted(full_df['Status'].astype(str).unique().tolist())
+    if 'project_statuses_cache' in st.session_state:
+        unique_statuses = st.session_state['project_statuses_cache']
+        # Also ensure any statuses from CSV files are included if they overlap
+        df_statuses = set(full_df['Status'].astype(str).unique().tolist())
+        unique_statuses = sorted(list(set(unique_statuses) | df_statuses))
+    else:
+        unique_statuses = sorted(full_df['Status'].astype(str).unique().tolist())
     
     # Initialize session state for mapping
     if 'status_mapping' not in st.session_state:
