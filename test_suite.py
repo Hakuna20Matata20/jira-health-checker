@@ -282,6 +282,99 @@ class TestCalculateMetricsNoiseRatio:
         results = app.calculate_metrics(df, 30, mapping)
         assert results["noise_ratio"] == 0
 
+class TestCycleTimeCalculation:
+    """Tests for the Cycle Time metric calculation logic."""
+
+    def test_calculate_cycle_time_no_transitions(self):
+        """If task is DONE but has no transitions, it still needs fallback logic handling without crashing."""
+        df = pd.DataFrame({
+            "Issue key": ["T-1"],
+            "Category": ["DONE"],
+            "Transitions": [[]],
+            "Created": [pd.Timestamp("2023-01-01", tz="UTC")],
+            "Updated": [pd.Timestamp("2023-01-02", tz="UTC")],
+            "Status": ["Done"],
+            "Assignee": ["User 1"],
+            "Issue Type": ["Task"]
+        })
+        results = app.calculate_metrics(df, 30, {"Done": "DONE"})
+        
+        # It should fall back to using 'Created' as the start date
+        assert len(results["avg_cycle_time"].__str__()) > 0
+        assert results["avg_cycle_time"] >= 0
+
+    def test_calculate_cycle_time_valid_transitions(self):
+        """Standard flow: Created -> In Progress -> Done"""
+        df = pd.DataFrame({
+            "Issue key": ["T-2"],
+            "Category": ["DONE"],
+            "Created": [pd.Timestamp("2023-01-01", tz="UTC")],
+            "Updated": [pd.Timestamp("2023-01-05", tz="UTC")],
+            "Status": ["Done"],
+            "Assignee": ["User 2"],
+            "Issue Type": ["Task"],
+            "Transitions": [[
+                {"to": "In Progress", "date": "2023-01-02T10:00:00Z"},
+                {"to": "Done", "date": "2023-01-05T10:00:00Z"}
+            ]]
+        })
+        mapping = {"In Progress": "IN_PROGRESS", "Done": "DONE"}
+        results = app.calculate_metrics(df, 30, mapping)
+        
+        # 3 days difference (2023-01-05 - 2023-01-02)
+        assert results["avg_cycle_time"] == 3.0
+
+    def test_calculate_cycle_time_in_progress(self):
+        """Task still in progress: Cycle time should calculate from In Progress date to NOW."""
+        df = pd.DataFrame({
+            "Issue key": ["T-3"],
+            "Category": ["IN_PROGRESS"],
+            "Created": [pd.Timestamp("2023-01-01", tz="UTC")],
+            "Updated": [pd.Timestamp.now(tz="UTC")],
+            "Status": ["In Progress"],
+            "Assignee": ["User 3"],
+            "Issue Type": ["Task"],
+            "Transitions": [[
+                {"to": "In Progress", "date": (pd.Timestamp.now(tz="UTC") - pd.Timedelta(days=5)).isoformat()}
+            ]]
+        })
+        mapping = {"In Progress": "IN_PROGRESS"}
+        results = app.calculate_metrics(df, 30, mapping)
+        
+        # `avg_cycle_time` only counts DONE tasks, so it should be 0
+        assert results["avg_cycle_time"] == 0
+
+class TestAISummary:
+    """Tests for Executive AI Summary generation logic."""
+    
+    def test_generate_summary_no_api_key(self):
+        result = app.generate_executive_summary({}, api_key="")
+        assert "⚠️ Введіть OpenAI API Key" in result
+        
+    def test_generate_summary_success(self):
+        metric_data = {
+            'total_issues': 100,
+            'zombies': [1, 2],
+            'overloaded_assignees': ["User A", "User B"],
+            'noise_ratio': 15.5,
+            'avg_cycle_time': 4.2
+        }
+        
+        mock_response = MagicMock()
+        mock_response.choices[0].message.content = "Чудовий резюме звіт від AI."
+        
+        with patch("app.OpenAI") as MockOpenAI:
+            mock_client = MockOpenAI.return_value
+            mock_client.chat.completions.create.return_value = mock_response
+            
+            result = app.generate_executive_summary(metric_data, "fake-key")
+            
+        assert result == "Чудовий резюме звіт від AI."
+        # Verify JSON dumping worked without crashing
+        mock_client.chat.completions.create.assert_called_once()
+        call_args = mock_client.chat.completions.create.call_args[1]
+        assert "Average Cycle Time (Days)" in call_args["messages"][0]["content"]
+
 
 class TestEmptyDataframeSafety:
     """Metrics calculation must not crash on an empty DataFrame."""

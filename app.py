@@ -167,7 +167,7 @@ def fetch_jira_data(jira_url, email, api_token, project_key, days_back):
     }
     
     all_issues = []
-    next_page_token = None
+    start_at = 0
     max_results = 100 
     
     status_placeholder = st.empty()
@@ -181,12 +181,10 @@ def fetch_jira_data(jira_url, email, api_token, project_key, days_back):
             
             payload = {
                 "jql": jql,
+                "startAt": start_at,
                 "maxResults": max_results,
                 "fields": ["key", "summary", "status", "assignee", "created", "updated", "issuetype", "priority"],
             }
-            
-            if next_page_token:
-                payload["nextPageToken"] = next_page_token
                 
             response = requests.post(
                 api_endpoint, 
@@ -209,10 +207,10 @@ def fetch_jira_data(jira_url, email, api_token, project_key, days_back):
                 break
                 
             all_issues.extend(batch)
+            start_at += len(batch)
             
-            next_page_token = data.get("nextPageToken")
-            
-            if not next_page_token:
+            total_issues = data.get("total", 0)
+            if start_at >= total_issues:
                 break
                 
         # 2. Fetch Changelog History (Separate Loop for Reliability)
